@@ -7,7 +7,6 @@
     <title>学生</title>
 </head>
 <body>
-<h1>ip地址为:${ip}</h1>
-<h1>这里是学生平台</h1>
+<h1>你已经评教过了</h1>
 </body>
 </html>
