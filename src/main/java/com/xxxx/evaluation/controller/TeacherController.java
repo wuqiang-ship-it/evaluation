@@ -1,11 +1,14 @@
 package com.xxxx.evaluation.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.xxxx.evaluation.pojo.BaseResult;
 import com.xxxx.evaluation.pojo.Teacher;
 import com.xxxx.evaluation.service.TeacherService;
 import com.xxxx.evaluation.utils.IPUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 教师
@@ -27,15 +31,11 @@ public class TeacherController {
     TeacherService teacherService;
     @RequestMapping("/admin")
     public String admin(HttpServletRequest request, HttpServletResponse response){
-        ServletContext application = request.getServletContext();
+         ServletContext application = request.getServletContext();
          Teacher teacher= (Teacher) application.getAttribute("teacher"+IPUtils.getIpAddress(request));
          if (teacher==null){
             return "login";
          }
-         if(application.getAttribute("teachers")==null){
-             application.setAttribute("teachers",teacherService.select());
-         }
-        System.out.println(teacherService.select());
         return "admin";
     }
     @RequestMapping("/login")
@@ -50,7 +50,10 @@ public class TeacherController {
         }else {
             return "login";
         }
-
+        if(application.getAttribute("teachers")==null){
+            application.setAttribute("teachers",teacherService.select());
+        }
+        System.out.println(teacherService.select());
         return "admin";
     }
     @RequestMapping("/start")
@@ -79,6 +82,7 @@ public class TeacherController {
     @ResponseBody
     public BaseResult end(HttpServletRequest request, HttpServletResponse response){
         ServletContext application = request.getServletContext();
+
         Teacher teacher= (Teacher)  application.getAttribute("teacher"+IPUtils.getIpAddress(request));
         if (teacher==null){
             return BaseResult.error();
@@ -91,5 +95,32 @@ public class TeacherController {
             return BaseResult.success();
         }
         return BaseResult.error();
+    }
+    @RequestMapping("/linkage")
+    @ResponseBody
+    public BaseResult linkage(HttpServletRequest request, HttpServletResponse response,String grade){
+        BaseResult baseResult = new BaseResult();
+        if (StringUtils.isEmpty(grade)){
+            baseResult.setCode(402);
+            baseResult.setMessage("请选择班级");
+            return baseResult.error();
+        }
+        ServletContext application = request.getServletContext();
+        JSONArray jsonArray = (JSONArray) application.getAttribute("teachers");
+        if (CollectionUtils.isEmpty(jsonArray)){
+            baseResult.setCode(400);
+            baseResult.setMessage("系统出错了");
+            return baseResult.error();
+        }
+        for (int i=0;i<jsonArray.size();i++){
+           if(grade.equals(jsonArray.getJSONObject(i).get("grade"))) {
+               baseResult.setCode(200);
+               baseResult.setMessage(jsonArray.getJSONObject(i).toString());
+               return baseResult;
+           }
+        }
+        baseResult.setCode(401);
+        baseResult.setMessage("没有查到该班级");
+        return baseResult.error();
     }
 }
