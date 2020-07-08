@@ -1,10 +1,11 @@
 package com.xxxx.evaluation.pojo;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class User {
     private String ip;
-    private Map<String ,String> topic;
+    private Map<String ,String> topic = new HashMap<>();
     private Boolean flag=false;
 
     public String getIp() {
