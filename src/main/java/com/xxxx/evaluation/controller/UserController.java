@@ -15,7 +15,6 @@ public class UserController {
 
 	@RequestMapping("/admin")
 	public String login(){
-
 		return "admin";
 	}
 	/**
