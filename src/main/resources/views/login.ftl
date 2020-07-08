@@ -4,9 +4,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>学生</title>
+    <title>教师</title>
 </head>
 <body>
-<h1>你已经评教过该门课程</h1>
+<h1>请输入密码</h1>
 </body>
 </html>

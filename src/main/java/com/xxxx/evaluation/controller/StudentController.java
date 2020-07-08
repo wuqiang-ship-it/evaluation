@@ -28,10 +28,6 @@ public class StudentController {
 	@Autowired
 	private StudentServiceImp studentService;
 
-	@RequestMapping("/admin")
-	public String login(){
-		return "admin";
-	}
 	/**
 	 * 页面跳转，首页
 	 * @return

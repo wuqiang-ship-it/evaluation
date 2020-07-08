@@ -4,9 +4,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>学生</title>
+    <title>老师</title>
 </head>
 <body>
-<h1>你已经评教过该门课程</h1>
+<h1>该门课程已经评教过了</h1>
 </body>
 </html>

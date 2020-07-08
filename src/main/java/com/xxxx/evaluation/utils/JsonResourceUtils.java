@@ -3,6 +3,7 @@ package com.xxxx.evaluation.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.xxxx.evaluation.pojo.Teacher;
 import com.xxxx.evaluation.pojo.User;
 import org.apache.commons.io.FileUtils;
 
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonResourceUtils {
@@ -82,6 +84,29 @@ public class JsonResourceUtils {
             jsonArray.add(user);
             System.out.println(jsonArray);
             bw.write(jsonArray.toString());
+            bw.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+
+        }
+        return false;
+    }
+    public static boolean updateFile(String filePath,List list){
+        URL l1 =Thread.currentThread().
+                getContextClassLoader().
+                getResource(filePath);
+
+        String path=String.valueOf(l1);
+        //去除file:/的前缀
+        path = path.replace("file:/","");
+
+        try {
+            FileWriter writer = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(writer);
+            JSONArray array= JSONArray.parseArray(JSON.toJSONString(list));
+            bw.write(array.toString());
             bw.close();
             return true;
         } catch (IOException e) {
