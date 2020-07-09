@@ -63,7 +63,7 @@ public class StudentController {
 	 */
 	@RequestMapping("/save")
 	@ResponseBody
-	public BaseResult save(String key,String value,HttpServletRequest request){
+	public BaseResult save(HttpServletRequest request){
 		ServletContext application = request.getServletContext();
 		User user= (User) application.getAttribute(IPUtils.getIpAddress(request));
 		user.setFlag(true);
