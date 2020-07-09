@@ -3,6 +3,7 @@ package com.xxxx.evaluation.pojo;
 import com.xxxx.evaluation.enums.BaseResultEnum;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 公共保存状态返回对象
@@ -13,6 +14,15 @@ public class BaseResult implements Serializable {
     // 状态描述
     private String message;
     // 分页对象(商品列表需要-pom.xml添加依赖)
+    private List<Teacher> list;
+
+    public List<Teacher> getList() {
+        return list;
+    }
+
+    public void setList(List<Teacher> list) {
+        this.list = list;
+    }
 
     //成功返回的对象
     public static BaseResult success() {
