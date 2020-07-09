@@ -39,205 +39,207 @@ input[type="radio"]:checked{background:url(images/radio_checked.png) no-repeat c
     <div class="content">
         <h2>1.讲课老师是否有激情,能否传递正能量?</h2>
         <ul>
-            <li><input type="radio" name="radio0"><span>1分</span></li>
-            <li><input type="radio" name="radio0"><span>2分</span></li>
-            <li><input type="radio" name="radio0"><span>3分</span></li>
-            <li><input type="radio" name="radio0"><span>4分</span></li>
-            <li><input type="radio" name="radio0"><span>5分</span></li>
+            <input type="text"  id="key1" value="">
+            <input type="text" id="value1" value="">
+            <li><input type="radio" name="radio0" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio0" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio0" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio0" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio0" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>2.你是否充分掌握授课目标?</h2>
         <ul>
-            <li><input type="radio" name="radio1"><span>1分</span></li>
-            <li><input type="radio" name="radio1"><span>2分</span></li>
-            <li><input type="radio" name="radio1"><span>3分</span></li>
-            <li><input type="radio" name="radio1"><span>4分</span></li>
-            <li><input type="radio" name="radio1"><span>5分</span></li>
+            <li><input type="radio" name="radio1" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio1" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio1" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio1" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio1" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>3.讲师讲解重点问题是否突出?</h2>
         <ul>
-            <li><input type="radio" name="radio2"><span>1分</span></li>
-            <li><input type="radio" name="radio2"><span>2分</span></li>
-            <li><input type="radio" name="radio2"><span>3分</span></li>
-            <li><input type="radio" name="radio2"><span>4分</span></li>
-            <li><input type="radio" name="radio2"><span>5分</span></li>
+            <li><input type="radio" name="radio2" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio2" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio2" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio2" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio2" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>4.讲师是否能用简单易懂的语言讲解知识点?</h2>
         <ul>
-            <li><input type="radio" name="radio3"><span>1分</span></li>
-            <li><input type="radio" name="radio3"><span>2分</span></li>
-            <li><input type="radio" name="radio3"><span>3分</span></li>
-            <li><input type="radio" name="radio3"><span>4分</span></li>
-            <li><input type="radio" name="radio3"><span>5分</span></li>
+            <li><input type="radio" name="radio3" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio3" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio3" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio3" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio3" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>5.讲师授课逻辑是否清晰?</h2>
         <ul>
-            <li><input type="radio" name="radio4"><span>1分</span></li>
-            <li><input type="radio" name="radio4"><span>2分</span></li>
-            <li><input type="radio" name="radio4"><span>3分</span></li>
-            <li><input type="radio" name="radio4"><span>4分</span></li>
-            <li><input type="radio" name="radio4"><span>5分</span></li>
+            <li><input type="radio" name="radio4" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio4" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio4" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio4" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio4" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>6.讲师是否具有案例分析能力,引导学生参与?</h2>
         <ul>
-            <li><input type="radio" name="radio5"><span>1分</span></li>
-            <li><input type="radio" name="radio5"><span>2分</span></li>
-            <li><input type="radio" name="radio5"><span>3分</span></li>
-            <li><input type="radio" name="radio5"><span>4分</span></li>
-            <li><input type="radio" name="radio5"><span>5分</span></li>
+            <li><input type="radio" name="radio5" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio5" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio5" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio5" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio5" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>7.讲师授课速度是否得当?</h2>
         <ul>
-            <li><input type="radio" name="radio6"><span>1分</span></li>
-            <li><input type="radio" name="radio6"><span>2分</span></li>
-            <li><input type="radio" name="radio6"><span>3分</span></li>
-            <li><input type="radio" name="radio6"><span>4分</span></li>
-            <li><input type="radio" name="radio6"><span>5分</span></li>
+            <li><input type="radio" name="radio6" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio6" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio6" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio6" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio6" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>8.教师内容是否准备充分?</h2>
         <ul>
-            <li><input type="radio" name="radio7"><span>1分</span></li>
-            <li><input type="radio" name="radio7"><span>2分</span></li>
-            <li><input type="radio" name="radio7"><span>3分</span></li>
-            <li><input type="radio" name="radio7"><span>4分</span></li>
-            <li><input type="radio" name="radio7"><span>5分</span></li>
+            <li><input type="radio" name="radio7" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio7" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio7" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio7" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio7" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>9.课上是否有充分的练习时间?</h2>
         <ul>
-            <li><input type="radio" name="radio8"><span>1分</span></li>
-            <li><input type="radio" name="radio8"><span>2分</span></li>
-            <li><input type="radio" name="radio8"><span>3分</span></li>
-            <li><input type="radio" name="radio8"><span>4分</span></li>
-            <li><input type="radio" name="radio8"><span>5分</span></li>
+            <li><input type="radio" name="radio8" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio8" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio8" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio8" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio8" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>10.课下是否有充足的时间联系?</h2>
         <ul>
-            <li><input type="radio" name="radio9"><span>1分</span></li>
-            <li><input type="radio" name="radio9"><span>2分</span></li>
-            <li><input type="radio" name="radio9"><span>3分</span></li>
-            <li><input type="radio" name="radio9"><span>4分</span></li>
-            <li><input type="radio" name="radio9"><span>5分</span></li>
+            <li><input type="radio" name="radio9" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio9" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio9" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio9" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio9" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>11.讲师对待学员是否礼貌,有亲和力?</h2>
         <ul>
-            <li><input type="radio" name="radio10"><span>1分</span></li>
-            <li><input type="radio" name="radio10"><span>2分</span></li>
-            <li><input type="radio" name="radio10"><span>3分</span></li>
-            <li><input type="radio" name="radio10"><span>4分</span></li>
-            <li><input type="radio" name="radio10"><span>5分</span></li>
+            <li><input type="radio" name="radio10" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio10" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio10" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio10" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio10" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>12.讲师能否对学员做到有效监督?</h2>
         <ul>
-            <li><input type="radio" name="radio11"><span>1分</span></li>
-            <li><input type="radio" name="radio11"><span>2分</span></li>
-            <li><input type="radio" name="radio11"><span>3分</span></li>
-            <li><input type="radio" name="radio11"><span>4分</span></li>
-            <li><input type="radio" name="radio11"><span>5分</span></li>
+            <li><input type="radio" name="radio11" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio11" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio11" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio11" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio11" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>13.请教老师问题是否能得到耐心,有效解答?</h2>
         <ul>
-            <li><input type="radio" name="radio12"><span>1分</span></li>
-            <li><input type="radio" name="radio12"><span>2分</span></li>
-            <li><input type="radio" name="radio12"><span>3分</span></li>
-            <li><input type="radio" name="radio12"><span>4分</span></li>
-            <li><input type="radio" name="radio12"><span>5分</span></li>
+            <li><input type="radio" name="radio12" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio12" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio12" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio12" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio12" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>14.讲师解决问题是否举一反三,做到有效拓展?</h2>
         <ul>
-            <li><input type="radio" name="radio13"><span>1分</span></li>
-            <li><input type="radio" name="radio13"><span>2分</span></li>
-            <li><input type="radio" name="radio13"><span>3分</span></li>
-            <li><input type="radio" name="radio13"><span>4分</span></li>
-            <li><input type="radio" name="radio13"><span>5分</span></li>
+            <li><input type="radio" name="radio13" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio13" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio13" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio13" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio13" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>15.讲师能否做到针对一些共性问题统一讲解?</h2>
         <ul>
-            <li><input type="radio" name="radio14"><span>1分</span></li>
-            <li><input type="radio" name="radio14"><span>2分</span></li>
-            <li><input type="radio" name="radio14"><span>3分</span></li>
-            <li><input type="radio" name="radio14"><span>4分</span></li>
-            <li><input type="radio" name="radio14"><span>5分</span></li>
+            <li><input type="radio" name="radio14" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio14" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio14" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio14" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio14" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>16.讲师能否做到认真负责,关注学生?</h2>
         <ul>
-            <li><input type="radio" name="radio15"><span>1分</span></li>
-            <li><input type="radio" name="radio15"><span>2分</span></li>
-            <li><input type="radio" name="radio15"><span>3分</span></li>
-            <li><input type="radio" name="radio15"><span>4分</span></li>
-            <li><input type="radio" name="radio15"><span>5分</span></li>
+            <li><input type="radio" name="radio15" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio15" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio15" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio15" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio15" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>17.课堂笔记是否及时整理并发送给你?</h2>
         <ul>
-            <li><input type="radio" name="radio16"><span>1分</span></li>
-            <li><input type="radio" name="radio16"><span>2分</span></li>
-            <li><input type="radio" name="radio16"><span>3分</span></li>
-            <li><input type="radio" name="radio16"><span>4分</span></li>
-            <li><input type="radio" name="radio16"><span>5分</span></li>
+            <li><input type="radio" name="radio16" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio16" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio16" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio16" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio16" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>18.讲师是否仪容端庄,举止大方?</h2>
         <ul>
-            <li><input type="radio" name="radio17"><span>1分</span></li>
-            <li><input type="radio" name="radio17"><span>2分</span></li>
-            <li><input type="radio" name="radio17"><span>3分</span></li>
-            <li><input type="radio" name="radio17"><span>4分</span></li>
-            <li><input type="radio" name="radio17"><span>5分</span></li>
+            <li><input type="radio" name="radio17" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio17" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio17" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio17" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio17" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>19.讲师能否做到不经常串课旷课?</h2>
         <ul>
-            <li><input type="radio" name="radio18"><span>1分</span></li>
-            <li><input type="radio" name="radio18"><span>2分</span></li>
-            <li><input type="radio" name="radio18"><span>3分</span></li>
-            <li><input type="radio" name="radio18"><span>4分</span></li>
-            <li><input type="radio" name="radio18"><span>5分</span></li>
+            <li><input type="radio" name="radio18" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio18" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio18" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio18" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio18" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content">
         <h2>20.你是否喜欢这位老师?</h2>
         <ul>
-            <li><input type="radio" name="radio19" ><span>1分</span></li>
-            <li><input type="radio" name="radio19" ><span>2分</span></li>
-            <li><input type="radio" name="radio19" ><span>3分</span></li>
-            <li><input type="radio" name="radio19" ><span>4分</span></li>
-            <li><input type="radio" name="radio19" ><span>5分</span></li>
+            <li><input type="radio" name="radio19" value="1"><span>1分</span></li>
+            <li><input type="radio" name="radio19" value="2"><span>2分</span></li>
+            <li><input type="radio" name="radio19" value="3"><span>3分</span></li>
+            <li><input type="radio" name="radio19" value="4"><span>4分</span></li>
+            <li><input type="radio" name="radio19" value="5"><span>5分</span></li>
         </ul>
     </div>
     <div class="content_other">
-        <h2>21.你想对这位老师说的话!!!（必填）</h2>
+        <h2>21.你想对这位老师说的话!!!（选填）</h2>
         <textarea maxlength="180" id="text"></textarea>
     </div>
 
@@ -245,11 +247,13 @@ input[type="radio"]:checked{background:url(images/radio_checked.png) no-repeat c
 </div>
 <script src="${ctx}/js/jquery.min.js"></script>
 <script>
-    
+
+
 function SutAjax() {
 
 
 }
+
 
 </script>
 </body>
