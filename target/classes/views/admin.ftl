@@ -36,7 +36,7 @@
                         <div class="col-sm-3">
                             <select id="next1" class="small form-control" onchange="getCategory(this.value,'next2','next3');">
                                 <option value="0">请选择班级:</option>
-                                <#list teacher as t>
+                                <#list StrName as t>
                                     <option value="${t}">${t}</option>
                                 </#list>
                             </select>

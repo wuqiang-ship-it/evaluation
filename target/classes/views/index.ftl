@@ -33,7 +33,6 @@ input[type="radio"]:checked{background:url(images/radio_checked.png) no-repeat c
 
     <div>
         <ul >
-            <li><h2>学生IP:</h2></li>
             <li><h2>测评老师:</h2></li>
             <li><h2>测评时间:</h2></li>
             <li><h2>测评班级:</h2></li>

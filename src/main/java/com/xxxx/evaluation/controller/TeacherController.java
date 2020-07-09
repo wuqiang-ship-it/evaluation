@@ -64,13 +64,13 @@ public class TeacherController {
         if(application.getAttribute("teachers")==null){
             application.setAttribute("teachers",teacherService.select());
             JSONArray jsonArray = teacherService.select();
-                List<String> teacher= new ArrayList<>();
+                List<String> StrName= new ArrayList<>();
             for (int i=0;i<jsonArray.size();i++){
                 String grade = (String) jsonArray.getJSONObject(i).get("grade");
-                teacher.add(grade);
+                StrName.add(grade);
             }
-            application.setAttribute("teacher",teacher);
-            System.out.println(teacher);
+            application.setAttribute("StrName",StrName);
+            System.out.println(StrName);
         }
 
         return BaseResult.success();
