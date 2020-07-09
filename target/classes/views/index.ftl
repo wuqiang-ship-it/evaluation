@@ -6,6 +6,23 @@
     <meta charset="UTF-8">
     <title>学生</title>
 </head>
+<style>
+*{margin:0;padding:0;outline:0;}
+html{font-size:62.5%;}
+body{font-size:1.2rem;color:#666;font-family:"Helvetica";}
+li{list-style:none;}
+h2{font-size:1.5rem;font-weight:normal;color:#333;}
+input[type="radio"], input[type="checkbox"]{-webkit-appearance:none;display:block;float:left;}
+input[type="radio"]{border:1px solid #999;border-radius:50%;width:1.2rem;height:1.2rem;margin:6px 10px 0 0;}
+input[type="radio"]:checked{background:url(images/radio_checked.png) no-repeat center top / 1.2rem 1.2rem;}
+.questionnaire{padding:1rem 1.5rem;}
+.questionnaire .content{margin-top:.5rem;}
+.content li{float:left;width:50%;height:2.2rem;line-height:2.2rem;}
+.content ul{overflow:hidden;margin-top:.5rem;}
+.content_seven li{width:100%;}
+.content_other textarea{resize:none;width:98%;padding-left:2%;height:6.4rem;margin-top:1rem;line-height:2rem;}
+#submit{width:100%;height:3rem;color:#fff;background:#9f9f9f;margin:3rem 0 2.7rem;border:0;}
+</style>
 <body>
 <div class="questionnaire">
     <div style="text-align: center;">
@@ -226,7 +243,7 @@
 
     <button id="submit" disabled>提交</button>
 </div>
-<script src="js/jquery.min.js"></script>
+<script src="${ctx}/js/jquery.min.js"></script>
 <script>
     $(".content input[name^='radio']").click(function(){    //input[name='radio'] 单选按钮只要被点击  那么他的选中状态永远都是true
         $(this).parent("li").addClass("checked").siblings("li").removeClass("checked").parents(".content").attr("data-id","checkBox");
