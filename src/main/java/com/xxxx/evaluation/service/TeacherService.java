@@ -11,4 +11,9 @@ public interface TeacherService {
     String password();
     Boolean update(Teacher teacher);
     Boolean isFlag(Teacher teacher);
+
+    /**
+     * 把文件传为ex表格
+     */
+    JSONArray exc();
 }

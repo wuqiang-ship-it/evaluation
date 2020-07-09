@@ -241,51 +241,15 @@ input[type="radio"]:checked{background:url(images/radio_checked.png) no-repeat c
         <textarea maxlength="180" id="text"></textarea>
     </div>
 
-    <button id="submit" disabled>提交</button>
+    <button id="button" onclick="SutAjax()" >提交</button>
 </div>
 <script src="${ctx}/js/jquery.min.js"></script>
 <script>
-    $(".content input[name^='radio']").click(function(){    //input[name='radio'] 单选按钮只要被点击  那么他的选中状态永远都是true
-        $(this).parent("li").addClass("checked").siblings("li").removeClass("checked").parents(".content").attr("data-id","checkBox");
-
-        var contentLen = $(".content").length;
-        var checkLen = $("div[data-id='checkBox']").length;
-
-        checked(contentLen,checkLen);
-    });
-
-    $(".content_checkbox").each(function(){
-        var self = $(this);
-        $(this).find("input[name^='checkbox']").click(function(){
-            if(this.checked == true){
-                $(this).parent("li").addClass("checked");
-            }else{
-                $(this).parent("li").removeClass("checked");
-            }
-
-            if(self.find("li").hasClass("checked")){
-                self.attr("data-id","checkBox");
-            }else{
-                self.removeAttr("data-id");
-            }
-
-            var contentLen = $(".content").length;
-            var checkLen = $("div[data-id='checkBox']").length;
-
-            checked(contentLen,checkLen);
-        });
+    
+function SutAjax() {
 
 
-    });
-
-    function checked(contentLen,checkLen){
-        if(contentLen == checkLen){
-            $("#submit").css({"background":"#3b7ded"}).removeAttr("disabled");
-        }else{
-            $("#submit").css({"background":"#9f9f9f"}).attr("disabled","disabled");
-        }
-    }
-
+}
 
 </script>
 </body>

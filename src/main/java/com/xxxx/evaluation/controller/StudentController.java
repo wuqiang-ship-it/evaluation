@@ -28,6 +28,11 @@ public class StudentController {
 	@Autowired
 	private StudentServiceImp studentService;
 
+	@RequestMapping("tree")
+	public String tree(){
+		return "tree";
+	}
+
 	/**
 	 * 页面跳转，首页
 	 * @return

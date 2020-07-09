@@ -145,4 +145,9 @@ public class TeacherController {
         baseResult.setMessage("没有查到该班级");
         return baseResult.error();
     }
+
+    @RequestMapping("upex")
+    public String upex(){
+        return "upex";
+    }
 }
