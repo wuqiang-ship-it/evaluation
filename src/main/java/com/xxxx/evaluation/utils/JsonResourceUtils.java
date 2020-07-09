@@ -131,7 +131,14 @@ public class JsonResourceUtils {
         }
         return num;
     }
-
+    public static JSONArray outLeving(JSONArray jsonArray){
+        JSONArray jsonArray1 = new JSONArray();
+        for (int i=0;i<jsonArray.size();i++){
+            Map<String,Object> map = (Map<String, Object>) jsonArray.getJSONObject(i).get("topic");
+            jsonArray1.add(map.get("leving"));
+        }
+        return jsonArray1;
+    }
 
     public static JSONObject writeNewWord(Teacher teacher){
         JSONArray jsonArray = getJsonObjFromResource("static/AdConfig.json");
@@ -162,6 +169,7 @@ public class JsonResourceUtils {
         map.put("CreateTime",teacher.getCreateTime());
         map.put("grade",teacher.getGrade());
         map.put("major",teacher.getMajor());
+        hashmap.put("leving",outLeving(jsonArray));
         hashmap.put("item",array);
         map.put("rows",hashmap);
         String jsonMap= JSONObject.toJSONString(map);
@@ -204,16 +212,16 @@ public class JsonResourceUtils {
 //        JSONArray jsonArray = getJsonObjFromResource("static/AdConfig.json");
 //        System.out.println(jsonArray);
 //        System.out.println(writeAppendFile("static/AdConfig.json",user,jsonArray));
-//        Teacher teacher = new Teacher();
-//        teacher.setFlag(false);
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String dateString = formatter.format(new Date());
-//        teacher.setCreateTime(dateString);
-//        teacher.setGrade("190708");
-//        teacher.setMajor("JAVA");
-//        teacher.setName("张静");
-//        writeNewWord(teacher);
-        writeAppendLeving("static/leving.json","老师很漂亮",getJsonObjFromResource("static/leving.json"));
+        Teacher teacher = new Teacher();
+        teacher.setFlag(false);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(new Date());
+        teacher.setCreateTime(dateString);
+        teacher.setGrade("190708");
+        teacher.setMajor("JAVA");
+        teacher.setName("张静");
+        writeNewWord(teacher);
+//        writeAppendLeving("static/leving.json","老师很漂亮",getJsonObjFromResource("static/leving.json"));
 
     }
 
