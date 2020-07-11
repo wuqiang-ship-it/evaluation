@@ -68,21 +68,18 @@ public class TeacherController {
         if(password==null){
             return BaseResult.error();
         }
-        //新的教师登录，需要清空原来的学生评教信息
-        if(!JsonResourceUtils.emptyFile("static/AdConfig.json")){
-            return BaseResult.error();
-        }
+//        //新的教师登录，需要清空原来的学生评教信息
+//        if(!JsonResourceUtils.emptyFile("static//AdConfig.json")){
+//            return BaseResult.error();
+//        }
         //如果密码不相等
         JSONObject jsonObject = JsonResourceUtils.getJsonObject("static/global.json");
-        System.out.println(jsonObject);
-        System.out.println(jsonObject.get("password"));
         if (!Md5Util.MD5(password).equals(jsonObject.getString("password"))){
             return BaseResult.error();
         }
         application.setAttribute("global",jsonObject);
         Map<String,List> map = (Map<String, List>) jsonObject.get("classes");
         application.setAttribute("major",map.keySet());
-        System.out.println(jsonObject.get("classes"));
         return BaseResult.success();
     }
 
@@ -135,7 +132,6 @@ public class TeacherController {
         ServletContext application = request.getServletContext();
         JSONObject jsonObject = (JSONObject) application.getAttribute("global");
         Map<String,List> map = (Map<String, List>) jsonObject.get("classes");
-        System.out.println("班级"+map.get(major));
         if(map.get(major)==null){
             application.setAttribute("grades",null);
             return BaseResult.error();
@@ -155,7 +151,6 @@ public class TeacherController {
     @RequestMapping("tree")
     @ResponseBody
     public JSONObject tree(){
-        System.out.println("进来了");
         return JsonResourceUtils.getJsonObject("static/newWord.json");
     }
     @RequestMapping("upexs")

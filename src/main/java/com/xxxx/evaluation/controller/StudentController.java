@@ -65,7 +65,6 @@ public class StudentController {
 		ServletContext application = request.getServletContext();
 		User user= (User) application.getAttribute(IPUtils.getIpAddress(request));
 		user.setFlag(true);
-		System.out.println(user);
 		if(studentService.saveStudent(user)){
 			//保存成功，清空作用域
 			application.setAttribute(IPUtils.getIpAddress(request),null);
@@ -80,9 +79,8 @@ public class StudentController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResult update(String key, String value, HttpServletRequest request, HttpServletResponse response){
-		System.out.println(key+"----"+value);
 		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(value)){
-           return BaseResult.error();
+			return BaseResult.error();
 		}
 		ServletContext application = request.getServletContext();
 		User user= (User) application.getAttribute(IPUtils.getIpAddress(request));
@@ -90,7 +88,6 @@ public class StudentController {
 		map.put(key, value);
 		user.setIp(IPUtils.getIpAddress(request));
 		user.setTopic(map);
-		System.out.println(user);
 		application.setAttribute(IPUtils.getIpAddress(request),user);
 		return BaseResult.success();
 	}

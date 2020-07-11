@@ -7,11 +7,9 @@ import com.xxxx.evaluation.pojo.Table;
 import com.xxxx.evaluation.pojo.Teacher;
 import com.xxxx.evaluation.pojo.User;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -20,18 +18,16 @@ public class JsonResourceUtils {
     private JsonResourceUtils() {
 
     }
-    public static JSONObject getJsonObject(String filename){
+    public static JSONObject getJsonObject(String filePath){
         JSONObject jsonObject=new JSONObject();
-        URL l1 =
-                Thread.currentThread().
-                        getContextClassLoader().
-                        getResource(filename);
-
-        String path=String.valueOf(l1);
-        //去除file:/的前缀
-        path = path.replace("file:/","");
+        Resource resource = new Resource();
+        String fileName = resource.getClass().getClassLoader().getResource(filePath).getPath();
+        fileName = fileName.replace("file:/","");
+        fileName = fileName.replace("!","");
+        fileName = fileName.replace(".jar","");
+        System.out.println("fileName---"+fileName);
         try {
-            File file = new File(path);
+            File file = new File(fileName);
             if (file.exists()) {
                 String content = FileUtils.readFileToString(file, "UTF-8");
                 jsonObject = JSON.parseObject(content);
@@ -49,19 +45,17 @@ public class JsonResourceUtils {
     }
 
     //filename 为文件名字 如 “/json/app_version_info.json”
-    public static JSONArray getJsonObjFromResource(String filename) {
+    public static JSONArray getJsonObjFromResource(String filePath) {
         JSONArray jsonArray = null;
-        URL l1 =
-                Thread.currentThread().
-                        getContextClassLoader().
-                        getResource(filename);
+        Resource resource = new Resource();
+        String fileName = resource.getClass().getClassLoader().getResource(filePath).getPath();
 
-        String path=String.valueOf(l1);
-        //去除file:/的前缀
-        path = path.replace("file:/","");
-
+        fileName = fileName.replace("file:/","");
+        fileName = fileName.replace("!","");
+        fileName = fileName.replace(".jar","");
+        System.out.println("fileName---"+fileName);
         try {
-            File file = new File(path);
+            File file = new File(fileName);
             if (file.exists()) {
                 String content = FileUtils.readFileToString(file, "UTF-8");
                 jsonArray = JSON.parseArray(content);
@@ -78,17 +72,16 @@ public class JsonResourceUtils {
     }
 
     public static boolean writeAppendFile(String filePath,User user,JSONArray jsonArray) {
-        URL l1 =Thread.currentThread().
-                getContextClassLoader().
-                getResource(filePath);
-
-        String path=String.valueOf(l1);
-        //去除file:/的前缀
-        path = path.replace("file:/","");
-
+        Resource resource = new Resource();
+        String fileName = resource.getClass().getClassLoader().getResource(filePath).getPath();
+        fileName = fileName.replace("file:/","");
+        fileName = fileName.replace("!","");
+        fileName = fileName.replace(".jar","");
+        System.out.println("fileName---"+fileName);
         try {
-            FileWriter writer = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(writer);
+//            FileWriter writer = new FileWriter(fileName);
+//            BufferedWriter bw = new BufferedWriter(writer);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)),"utf-8"));
             jsonArray.add(user);
             bw.write(jsonArray.toString());
             bw.close();
@@ -101,17 +94,16 @@ public class JsonResourceUtils {
         return false;
     }
     public static boolean writeAppendLeving(String filePath,String leving,JSONArray jsonArray) {
-        URL l1 =Thread.currentThread().
-                getContextClassLoader().
-                getResource(filePath);
-
-        String path=String.valueOf(l1);
-        //去除file:/的前缀
-        path = path.replace("file:/","");
-
+        Resource resource = new Resource();
+        String fileName = resource.getClass().getClassLoader().getResource(filePath).getPath();
+        fileName = fileName.replace("file:/","");
+        fileName = fileName.replace("!","");
+        fileName = fileName.replace(".jar","");
+        System.out.println("fileName---"+fileName);
         try {
-            FileWriter writer = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(writer);
+//            FileWriter writer = new FileWriter(fileName);
+//            BufferedWriter bw = new BufferedWriter(writer);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)),"utf-8"));
             jsonArray.add(leving);
             bw.write(jsonArray.toString());
             bw.close();
@@ -125,17 +117,16 @@ public class JsonResourceUtils {
     }
 
     public static boolean updateFile(String filePath,List list){
-        URL l1 =Thread.currentThread().
-                getContextClassLoader().
-                getResource(filePath);
-
-        String path=String.valueOf(l1);
-        //去除file:/的前缀
-        path = path.replace("file:/","");
-
+        Resource resource = new Resource();
+        String fileName = resource.getClass().getClassLoader().getResource(filePath).getPath();
+        fileName = fileName.replace("file:/","");
+        fileName = fileName.replace("!","");
+        fileName = fileName.replace(".jar","");
+        System.out.println("fileName---"+fileName);
         try {
-            FileWriter writer = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(writer);
+//            FileWriter writer = new FileWriter(fileName);
+//            BufferedWriter bw = new BufferedWriter(writer);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)),"utf-8"));
             JSONArray array= JSONArray.parseArray(JSON.toJSONString(list));
             bw.write(array.toString());
             bw.close();
@@ -148,17 +139,16 @@ public class JsonResourceUtils {
         return false;
     }
     public static boolean emptyFile(String filePath){
-        URL l1 =Thread.currentThread().
-                getContextClassLoader().
-                getResource(filePath);
-
-        String path=String.valueOf(l1);
-        //去除file:/的前缀
-        path = path.replace("file:/","");
-
+        Resource resource = new Resource();
+        String fileName = resource.getClass().getClassLoader().getResource(filePath).getPath();
+        fileName = fileName.replace("file:/","");
+        fileName = fileName.replace("!","");
+        fileName = fileName.replace(".jar","");
+        System.out.println("fileName---"+fileName);
         try {
-            FileWriter writer = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(writer);
+//            FileWriter writer = new FileWriter(fileName);
+//            BufferedWriter bw = new BufferedWriter(writer);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)),"utf-8"));
             bw.write("[]");
             bw.close();
             return true;
@@ -223,17 +213,15 @@ public class JsonResourceUtils {
         hashmap.put("item",array);
         map.put("rows",hashmap);
         String jsonMap= JSONObject.toJSONString(map);
-        URL l1 =Thread.currentThread().
-                getContextClassLoader().
-                getResource("static/newWord.json");
-
-        String path=String.valueOf(l1);
-        //去除file:/的前缀
-        path = path.replace("file:/","");
-
+        Resource resource = new Resource();
+        String fileName = resource.getClass().getClassLoader().getResource("static/newWord.json").getPath();
+        fileName = fileName.replace("file:/","");
+        fileName = fileName.replace("!","");
+        fileName = fileName.replace(".jar","");
         try {
-            FileWriter writer = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(writer);
+//            FileWriter writer = new FileWriter(fileName);
+//            BufferedWriter bw = new BufferedWriter(writer);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)),"utf-8"));
             bw.write(jsonMap);
             bw.close();
             return getJsonObject("static/newWord.json");
@@ -244,34 +232,6 @@ public class JsonResourceUtils {
         }
 
         return null;
-    }
-    public static void main(String[] args) {
-//        System.out.println(getJsonObjFromResource("static/AdConfig.json"));
-//        User user = new User();
-//        user.setIp("119.168.168.257");
-//        user.setFlag(true);
-//        Map<String, String> map = new HashMap<>();
-//        map.put("1","A");
-//        map.put("2","B");
-//        map.put("3","C");
-//        user.setTopic(map);
-//        //1.1 将User对象转成json
-//        Object obj = JSONArray.toJSON(user);
-//        String json = obj.toString();
-//        System.out.println("将User对象转成json:" + json);
-//        JSONArray jsonArray = getJsonObjFromResource("static/AdConfig.json");
-//        System.out.println(jsonArray);
-//        System.out.println(writeAppendFile("static/AdConfig.json",user,jsonArray));
-        Teacher teacher = new Teacher();
-        teacher.setFlag(false);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formatter.format(new Date());
-        teacher.setCreateTime(dateString);
-        teacher.setGrade("190708");
-        teacher.setMajor("JAVA");
-        teacher.setName("张静");
-        writeNewWord(teacher);
-
     }
 
 }
