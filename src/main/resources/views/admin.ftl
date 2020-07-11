@@ -7,9 +7,14 @@
     <title>教师</title>
     <link rel="stylesheet" href="${ctx}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctx}/layer/skin/layer.css">
+    <link rel="stylesheet" href="${ctx}/layui/css/layui.css">
     <script type="text/javascript" src="${ctx}/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${ctx}/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="${ctx}/layer/layer-min.js"></script>
+    <script type="text/javascript" src="${ctx}/layui/layui.js"></script>
+    <script type="text/javascript" src="${ctx}/js/excel.js"></script>
+
+    <script src="${ctx}/js/index.js"></script>
     <script src="${ctx}/js/xlsx.full.min.js"></script>
 
 </head>
@@ -29,23 +34,30 @@
             <form class="form-horizontal">
                 <div class="box-body">
                     <div class="form-group">
-                        <input type="hidden" name="name" id="name" value="" >
-                        <input type="hidden" name="major" id="major" value="" >
-                        <input type="hidden" name="grade" id="grade" value="" >
-                        <label0 class="control-label col-sm-2">班级:</label0>
+                        <label0 class="control-label col-sm-2">专业:</label0>
                         <div class="col-sm-3">
-                            <select id="next1" class="small form-control" onchange="getCategory(this.value,'next2','next3');">
-                                <option value="0">请选择班级:</option>
-                                <#list StrName as t>
+                            <select id="next1" class="small form-control"  onchange="getCategory(this.value);">
+                                <option value="0">请选择专业:</option>
+                                <#list major as t>
                                     <option value="${t}">${t}</option>
                                 </#list>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label0 class="control-label col-sm-2">专业:</label0>
+                        <label0 class="control-label col-sm-2">请选择班级:</label0>
                         <div class="col-sm-3">
                             <select class="small form-control" id="next3" >
+                                    <option value="0">请选择班级:</option>
+                                    <#if grades?? && (grades?size > 0) >
+                                        <#list grades as grade>
+                                            <option value="${grade}">${grade}</option>
+                                        </#list>
+                                    <#else>
+                                    </#if>
+
+
+
                             </select>
                         </div>
                     </div>
@@ -53,14 +65,26 @@
                         <label0 class="control-label col-sm-2">老师:</label0>
                         <div class="col-sm-3">
                             <select class="small form-control"  id="next2">
+                                <option value="0">请选择老师:</option>
+                                <#list global.teachers as teacher>
+                                    <option value="${teacher}">${teacher}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
 
                 </div>
                 <div class="box-footer">
-                    <button type="button" onclick="SubAjax()"  class="btn btn-primary" style="margin-left: 150px;">
+                    <button type="button" onclick="SubAjax()"  class="layui-btn"  style="margin-left: 150px;" id="start">
                         开始评测</button>
+                </div>
+                <div class="box-footer">
+                    <button type="button" onclick="endAjax()"  class="layui-btn layui-btn-disabled" style="margin-left: 150px;" id="end">
+                        结束评测</button>
+                </div>
+                <div class="box-footer">
+                    <button type="button" onclick="exportExtendDemo('${ctx}/tree')"  class="layui-btn layui-btn-disabled" style="margin-left: 150px;" id="upex">
+                        生成表格</button>
                 </div>
             </form>
         </div>
@@ -68,46 +92,35 @@
     </div>
     <!-- 面板 end -->
 </div>
-<!--
-        以下a标签不需要内容
-    -->
-<a href="" download="测评.xlsx" id="hf"></a>
 <script type="text/javascript">
-    function getCategory(grade,next2,next3) {
-        $("#name").val("");
-        $("#major").val("");
-        $("#grade").val("");
-        if(0==grade){
-            $("#next2").html("");
-            $("#next3").html("");
-            return;
-        }
-        var html3=null;
-        var html2=null;
-        console.log(grade)
-        $.ajax({
-            type: "post",
-            url: "${ctx}/linkage",
-            data: {
-                grade: grade
-            },
-            success: function (result) {
-                if (200 == result.code) {
-                    var mess=null;
-                    mess= JSON.parse(result.message)
-                    $("#name").val(mess.name);
-                    $("#major").val(mess.major);
-                    $("#grade").val(mess.grade);
-                    html3="<option value='" + mess.major + "'>" + mess.major + "</option>";
-                    $("#" + next3).html(html3);
-                    html2="<option value='" + mess.name + "'>" + mess.name + "</option>";
-                    $("#" + next2).html(html2);
-                } else {
-                    alert(result.message)
-                }
 
-            }
-        })
+        // $(function(){
+        //     $('#start').removeClass("layui-btn-disabled").attr("disabled",false);
+        // });
+
+        function getCategory(major) {
+            <#--location.href = "${ctx}/linkage?major="+major;-->
+            $.ajax({
+                type:"post",
+                url:"${ctx}/linkage",
+                data:{
+                    major:major,
+                },
+                success:function (result) {
+                    console.log(result.list);
+                    $("#next3 option").each(function(){
+                        var id = $(this).attr("value");
+                        if(id !=-1){
+                            this.remove();
+                        }
+                    });
+
+                    for(var i=0;i<result.list.length;i++){
+                        var rep = "<option value="+result.list[i]+">"+result.list[i]+"</option>";
+                        $("#next3").append(rep);
+                    }
+                }
+            })
     }
 
     /**
@@ -115,10 +128,11 @@
      * @constructor
      */
     function SubAjax() {
-     var name=$("#name").val();
-     var major= $("#major").val();
-     var grade=$("#grade").val();
-     if(0==grade){
+        var major=$("#next1 option:selected").val();
+        var name=$("#next2 option:selected").val();
+        var grade=$("#next3 option:selected").val();
+        console.log(major+" "+name+" "+grade);
+        if(0==grade){
          alert("请选择班级！！")
          return;
      }
@@ -132,27 +146,30 @@
             },
             success:function (result) {
                 if(200==result.code){
-                    layer.confirm('正在评测!!!',{
-                        btn:['结束测评']
-                    },function () {
-                        $.ajax({
-                            type:"post",
-                            url:"${ctx}/end",
-                            success:function (result) {
-                                if(200==result.code){
-                                    window.location.href="${ctx}/upex";
-                                    layer.msg('已经结束测评', {icon: 1});
-                                }else{
-                                    layer.msg('测评失败请重新测评', {icon: 1});
-                                }
-                            }
-                        })
+                    alert("评测中");
+                    $('#start').addClass("layui-btn-disabled").attr("disabled",true);
+                    $('#end').removeClass("layui-btn-disabled").attr("disabled",false);
 
-                        }
-                        
-                    )
                 }else{
                     alert("错误!!请重新选择")
+                }
+            }
+        })
+    }
+    function endAjax() {
+        $.ajax({
+            type:"post",
+            url:"${ctx}/end",
+            data:{},
+            success:function (result) {
+                if(200==result.code){
+
+                    alert("评价完毕");
+                    $('#end').addClass("layui-btn-disabled").attr("disabled",true);
+                    $('#upex').removeClass("layui-btn-disabled").attr("disabled",false);
+
+                }else{
+                    alert("异常");
                 }
             }
         })

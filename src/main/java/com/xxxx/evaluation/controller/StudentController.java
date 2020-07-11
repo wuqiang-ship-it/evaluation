@@ -36,9 +36,11 @@ public class StudentController {
 	@RequestMapping("/")
 	public String index(HttpServletRequest request, HttpServletResponse response){
 		ServletContext application = request.getServletContext();
+		String start = (String) application.getAttribute("start");
+		if (start == null){
+			return "over";
+		}
 		String ip = IPUtils.getIpAddress(request);
-
-		System.out.println(ip);
 		//判断该IP是否已经评教过了
 		if(studentService.selectStudent(ip)){
 			return "error";
@@ -78,6 +80,7 @@ public class StudentController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResult update(String key, String value, HttpServletRequest request, HttpServletResponse response){
+		System.out.println(key+"----"+value);
 		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(value)){
            return BaseResult.error();
 		}

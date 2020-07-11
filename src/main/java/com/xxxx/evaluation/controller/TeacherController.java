@@ -1,10 +1,12 @@
 package com.xxxx.evaluation.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.xxxx.evaluation.pojo.BaseResult;
 import com.xxxx.evaluation.pojo.Teacher;
 import com.xxxx.evaluation.service.TeacherService;
 import com.xxxx.evaluation.utils.IPUtils;
+import com.xxxx.evaluation.utils.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -19,7 +21,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.xxxx.evaluation.utils.JsonResourceUtils;
 import static com.xxxx.evaluation.utils.JsonResourceUtils.getJsonObjFromResource;
 
 /**
@@ -35,14 +39,25 @@ public class TeacherController {
     @RequestMapping("/admin")
     public String admin(HttpServletRequest request, HttpServletResponse response){
          ServletContext application = request.getServletContext();
-         Teacher teacher= (Teacher) application.getAttribute("teacher"+IPUtils.getIpAddress(request));
-         if (teacher==null){
+        System.out.println(IPUtils.getIpAddress(request));
+
+         if(!(IPUtils.getIpAddress(request).equals("127.0.0.1")||IPUtils.getIpAddress(request).equals("0:0:0:0:0:0:0:1"))){
+             return "login";
+         }
+         if (application.getAttribute("global")==null){
             return "login";
          }
+        if (application.getAttribute("end")!=null){
+            return "upexs";
+        }
         return "admin";
     }
     @RequestMapping("/login")
-    public String login1(){
+    public String login1(HttpServletRequest request, HttpServletResponse response){
+        ServletContext application = request.getServletContext();
+        if (application.getAttribute("end")!=null){
+            return "upexs";
+        }
         return  "login";
     }
     @RequestMapping("/login1")
@@ -53,48 +68,40 @@ public class TeacherController {
         if(password==null){
             return BaseResult.error();
         }
-        System.out.println(String.valueOf(getJsonObjFromResource("static/Password.json").getJSONObject(0).get("password")));
-
-        if(password.equals(teacherService.password())){
-            Teacher teacher = new Teacher();
-            application.setAttribute("teacher"+IPUtils.getIpAddress(request),teacher);
-        }else {
+        //新的教师登录，需要清空原来的学生评教信息
+        if(!JsonResourceUtils.emptyFile("static/AdConfig.json")){
             return BaseResult.error();
         }
-        if(application.getAttribute("teachers")==null){
-            application.setAttribute("teachers",teacherService.select());
-            JSONArray jsonArray = teacherService.select();
-                List<String> StrName= new ArrayList<>();
-            for (int i=0;i<jsonArray.size();i++){
-                String grade = (String) jsonArray.getJSONObject(i).get("grade");
-                StrName.add(grade);
-            }
-            application.setAttribute("StrName",StrName);
-            System.out.println(StrName);
+        //如果密码不相等
+        JSONObject jsonObject = JsonResourceUtils.getJsonObject("static/global.json");
+        System.out.println(jsonObject);
+        System.out.println(jsonObject.get("password"));
+        if (!Md5Util.MD5(password).equals(jsonObject.getString("password"))){
+            return BaseResult.error();
         }
-
+        application.setAttribute("global",jsonObject);
+        Map<String,List> map = (Map<String, List>) jsonObject.get("classes");
+        application.setAttribute("major",map.keySet());
+        System.out.println(jsonObject.get("classes"));
         return BaseResult.success();
     }
 
     @RequestMapping("/start")
     @ResponseBody
-    public BaseResult start(HttpServletRequest request, HttpServletResponse response,Teacher teacher2){
+    public BaseResult start(HttpServletRequest request, HttpServletResponse response,Teacher teacher){
         ServletContext application = request.getServletContext();
-        Teacher teacher= (Teacher)  application.getAttribute("teacher"+IPUtils.getIpAddress(request));
-        //非法拦截
-        if (teacher==null){
+        if(!(IPUtils.getIpAddress(request).equals("127.0.0.1")||IPUtils.getIpAddress(request).equals("0:0:0:0:0:0:0:1"))){
             return BaseResult.error();
         }
-        //如果没有该名老师或者已经测评完毕
-        if (teacherService.isFlag(teacher2)||teacherService.isFlag(teacher2)==null){
+        if (application.getAttribute("global")==null){
             return BaseResult.error();
         }
         //加入测评时间
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String dateString = formatter.format(new Date());
-            teacher2.setCreateTime(dateString);
-            teacher2.setFlag(false);
-         application.setAttribute("teacher"+IPUtils.getIpAddress(request),teacher2);
+            teacher.setCreateTime(dateString);
+            teacher.setFlag(false);
+         application.setAttribute("teacher",teacher);
          //标志，学生可以开始答题了
         application.setAttribute("start","start");
         return BaseResult.success();
@@ -103,51 +110,56 @@ public class TeacherController {
     @ResponseBody
     public BaseResult end(HttpServletRequest request, HttpServletResponse response){
         ServletContext application = request.getServletContext();
-
-        Teacher teacher= (Teacher)  application.getAttribute("teacher"+IPUtils.getIpAddress(request));
-        if (teacher==null){
+        if(!(IPUtils.getIpAddress(request).equals("127.0.0.1")||IPUtils.getIpAddress(request).equals("0:0:0:0:0:0:0:1"))){
             return BaseResult.error();
         }
-        teacher.setFlag(true);
-        if(teacherService.update(teacher)) {
-            //清空作用域
-            application.setAttribute("teacher"+IPUtils.getIpAddress(request),null);
-            application.setAttribute("start",null);
+        if (application.getAttribute("global")==null){
+            return BaseResult.error();
+        }
+        Teacher teacher = (Teacher) application.getAttribute("teacher");
+        //清空作用域
+        application.setAttribute("teacher",null);
+        application.setAttribute("start",null);
+        application.setAttribute("global",null);
+        //生成专属json文件
+        if(teacherService.update(teacher)!=null) {
+            application.setAttribute("end","end");
             return BaseResult.success();
         }
         return BaseResult.error();
     }
     @RequestMapping("/linkage")
     @ResponseBody
-    public BaseResult linkage(HttpServletRequest request, HttpServletResponse response,String grade){
-        BaseResult baseResult = new BaseResult();
-        if (StringUtils.isEmpty(grade)){
-            baseResult.setCode(402);
-            baseResult.setMessage("请选择班级");
-            return baseResult.error();
-        }
+    public BaseResult linkage(HttpServletRequest request, HttpServletResponse response,String major){
+        BaseResult baseResult= BaseResult.success();
         ServletContext application = request.getServletContext();
-        JSONArray jsonArray = (JSONArray) application.getAttribute("teachers");
-        if (CollectionUtils.isEmpty(jsonArray)){
-            baseResult.setCode(400);
-            baseResult.setMessage("系统出错了");
-            return baseResult.error();
+        JSONObject jsonObject = (JSONObject) application.getAttribute("global");
+        Map<String,List> map = (Map<String, List>) jsonObject.get("classes");
+        System.out.println("班级"+map.get(major));
+        if(map.get(major)==null){
+            application.setAttribute("grades",null);
+            return BaseResult.error();
+        }else {
+            application.setAttribute("grades",(JSONArray) map.get(major));
+            System.out.println();
+            baseResult.setList(map.get(major));
+            return baseResult;
         }
-        List<Teacher> t=null;
-        for (int i=0;i<jsonArray.size();i++){
-           if(grade.equals(jsonArray.getJSONObject(i).get("grade"))) {
-               baseResult.setCode(200);
-               baseResult.setMessage(jsonArray.getJSONObject(i).toString());
-               return baseResult;
-           }
-        }
-        baseResult.setCode(401);
-        baseResult.setMessage("没有查到该班级");
-        return baseResult.error();
     }
 
     @RequestMapping("upex")
     public String upex(){
         return "upex";
+    }
+
+    @RequestMapping("tree")
+    @ResponseBody
+    public JSONObject tree(){
+        System.out.println("进来了");
+        return JsonResourceUtils.getJsonObject("static/newWord.json");
+    }
+    @RequestMapping("upexs")
+    public String upexs(){
+        return "upexs";
     }
 }

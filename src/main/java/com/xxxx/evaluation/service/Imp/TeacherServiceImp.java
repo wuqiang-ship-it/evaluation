@@ -7,6 +7,7 @@ import com.xxxx.evaluation.pojo.BaseResult;
 import com.xxxx.evaluation.pojo.Teacher;
 import com.xxxx.evaluation.pojo.User;
 import com.xxxx.evaluation.service.TeacherService;
+import com.xxxx.evaluation.utils.JsonResourceUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,18 +30,8 @@ public class TeacherServiceImp implements TeacherService{
     }
 
     @Override
-    public Boolean update(Teacher teacher) {
-        JSONArray jsonArray = getJsonObjFromResource("static/teacher.json");
-        List list = new ArrayList();
-        for (int i=0;i<jsonArray.size();i++){
-            if(teacher.getName().equals(jsonArray.getJSONObject(i).get("name"))) {
-                list.add(teacher);
-            }else {
-                list.add(jsonArray.getJSONObject(i));
-            }
-        }
-        System.out.println(list);
-        return updateFile("static/teacher.json",list);
+    public JSONObject update(Teacher teacher) {
+        return JsonResourceUtils.writeNewWord(teacher);
     }
     @Override
     public Boolean isFlag(Teacher teacher) {

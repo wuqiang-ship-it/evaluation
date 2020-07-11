@@ -4,9 +4,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>老师</title>
+    <title>学生</title>
 </head>
 <body>
-<h1>该门课程已经评教过了</h1>
+<h1>请等待老师开启评测</h1>
 </body>
 </html>

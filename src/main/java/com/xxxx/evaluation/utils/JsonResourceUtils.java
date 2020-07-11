@@ -20,6 +20,34 @@ public class JsonResourceUtils {
     private JsonResourceUtils() {
 
     }
+    public static JSONObject getJsonObject(String filename){
+        JSONObject jsonObject=new JSONObject();
+        URL l1 =
+                Thread.currentThread().
+                        getContextClassLoader().
+                        getResource(filename);
+
+        String path=String.valueOf(l1);
+        //去除file:/的前缀
+        path = path.replace("file:/","");
+        try {
+            File file = new File(path);
+            if (file.exists()) {
+                String content = FileUtils.readFileToString(file, "UTF-8");
+                jsonObject = JSON.parseObject(content);
+
+            }else {
+                System.out.println("空");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return jsonObject;
+
+    }
+
     //filename 为文件名字 如 “/json/app_version_info.json”
     public static JSONArray getJsonObjFromResource(String filename) {
         JSONArray jsonArray = null;
@@ -119,6 +147,28 @@ public class JsonResourceUtils {
         }
         return false;
     }
+    public static boolean emptyFile(String filePath){
+        URL l1 =Thread.currentThread().
+                getContextClassLoader().
+                getResource(filePath);
+
+        String path=String.valueOf(l1);
+        //去除file:/的前缀
+        path = path.replace("file:/","");
+
+        try {
+            FileWriter writer = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(writer);
+            bw.write("[]");
+            bw.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+
+        }
+        return false;
+    }
     public static int out(JSONArray jsonArray,Integer g,int k){
         int num=0;
         for (int i=0;i<jsonArray.size();i++){
@@ -147,7 +197,7 @@ public class JsonResourceUtils {
 
         for (int i=0;i<20;i++){
             Table table = new Table();
-            table.setId(i);
+            table.setId(i+1);
             table.setName(stat[i]);
             table.setFive(out(jsonArray,5,i+1));
             table.setFour(out(jsonArray,4,i+1));
@@ -186,7 +236,7 @@ public class JsonResourceUtils {
             BufferedWriter bw = new BufferedWriter(writer);
             bw.write(jsonMap);
             bw.close();
-            return null;
+            return getJsonObject("static/newWord.json");
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -221,7 +271,6 @@ public class JsonResourceUtils {
         teacher.setMajor("JAVA");
         teacher.setName("张静");
         writeNewWord(teacher);
-//        writeAppendLeving("static/leving.json","老师很漂亮",getJsonObjFromResource("static/leving.json"));
 
     }
 
