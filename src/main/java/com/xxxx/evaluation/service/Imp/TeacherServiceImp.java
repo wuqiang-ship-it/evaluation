@@ -21,28 +21,18 @@ public class TeacherServiceImp implements TeacherService{
 
     @Override
     public JSONArray select() {
-        return getJsonObjFromResource("static/teacher.json");
+        return getJsonObjFromResource("/static/teacher.json");
     }
 
     @Override
     public String password() {
-        return String.valueOf(getJsonObjFromResource("static/Password.json").getJSONObject(0).get("password"));
+        return String.valueOf(getJsonObjFromResource("/static/Password.json").getJSONObject(0).get("password"));
     }
 
     @Override
-    public JSONObject update(Teacher teacher) {
-        return JsonResourceUtils.writeNewWord(teacher);
-    }
-    @Override
-    public Boolean isFlag(Teacher teacher) {
-        JSONArray jsonArray = getJsonObjFromResource("static/teacher.json");
-        List list = new ArrayList();
-        for (int i=0;i<jsonArray.size();i++){
-            if(teacher.getName().equals(jsonArray.getJSONObject(i).get("name"))) {
-              return (Boolean)jsonArray.getJSONObject(i).get("flag");
-            }
-        }
-        return null;
+    public JSONObject update(Teacher teacher,JSONArray jsonArray) {
+
+        return JsonResourceUtils.writeNewWord(teacher,jsonArray);
     }
 
     /**
@@ -52,7 +42,7 @@ public class TeacherServiceImp implements TeacherService{
     @Override
     public JSONArray exc() {
 
-        return getJsonObjFromResource("static/AdConfig.json");
+        return getJsonObjFromResource("/static/AdConfig.json");
     }
 
 

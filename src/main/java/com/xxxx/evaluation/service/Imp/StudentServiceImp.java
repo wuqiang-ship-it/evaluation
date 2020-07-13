@@ -17,7 +17,7 @@ public class StudentServiceImp implements StudentService {
     * */
     @Override
     public  boolean selectStudent(String IP){
-        JSONArray jsonArray = getJsonObjFromResource("static/AdConfig.json");
+        JSONArray jsonArray = getJsonObjFromResource("/static/AdConfig.json");
         List list = new ArrayList();
         for (int i=0;i<jsonArray.size();i++){
 
@@ -33,6 +33,6 @@ public class StudentServiceImp implements StudentService {
      * */
     @Override
     public  boolean saveStudent(User user){
-       return JsonResourceUtils.writeAppendFile("static/AdConfig.json",user,getJsonObjFromResource("static/AdConfig.json"));
+       return JsonResourceUtils.writeAppendFile("/static/AdConfig.json",user,getJsonObjFromResource("/static/AdConfig.json"));
     }
 }

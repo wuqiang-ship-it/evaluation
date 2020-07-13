@@ -1,5 +1,7 @@
 package com.xxxx.evaluation.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.xxxx.evaluation.pojo.BaseResult;
 import com.xxxx.evaluation.pojo.User;
 import com.xxxx.evaluation.service.Imp.StudentServiceImp;
@@ -65,12 +67,17 @@ public class StudentController {
 		ServletContext application = request.getServletContext();
 		User user= (User) application.getAttribute(IPUtils.getIpAddress(request));
 		user.setFlag(true);
-		if(studentService.saveStudent(user)){
-			//保存成功，清空作用域
-			application.setAttribute(IPUtils.getIpAddress(request),null);
-			return BaseResult.success();
+		JSONArray jsonArray =new JSONArray();
+		jsonArray.add(user);
+		JSONArray json= (JSONArray) application.getAttribute("Students");
+		if (json==null){
+			application.setAttribute("Students",jsonArray);
+		}else {
+			json.add(user);
+			application.setAttribute("Students",json);
 		}
-		return BaseResult.error();
+		System.out.println("Students"+(JSONArray) application.getAttribute("Students"));
+		return BaseResult.success();
 	}
 	/**
 	 * 页面跳转，首页
@@ -79,6 +86,7 @@ public class StudentController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public BaseResult update(String key, String value, HttpServletRequest request, HttpServletResponse response){
+		System.out.println(key+"---"+value);
 		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(value)){
 			return BaseResult.error();
 		}

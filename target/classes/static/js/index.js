@@ -452,16 +452,18 @@ function exportExtendDemo(url) {
           , avg: ''
         })
         for (var i=0;i<res.rows.leving.length;i++){
-          data.push({
-            id:''
-            ,name: res.rows.leving[i]
-            ,five: ' '
-            , four: ' '
-            , three: ' '
-            , two: ' '
-            , one: ''
-            , avg: ''
-          });
+          if (res.rows.leving[i]!=null&&res.rows.leving[i]!=""&&res.rows.leving[i]!=undefined){
+            data.push({
+              id:''
+              ,name: res.rows.leving[i]
+              ,five: ' '
+              , four: ' '
+              , three: ' '
+              , two: ' '
+              , one: ''
+              , avg: ''
+            });
+          }
         }
         // 1. 复杂表头合并[B1,C1,D1][E1,F1]
         var mergeConf = excel.makeMergeConfig([

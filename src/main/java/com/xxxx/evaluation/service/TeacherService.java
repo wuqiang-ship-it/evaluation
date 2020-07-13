@@ -10,8 +10,7 @@ import com.xxxx.evaluation.pojo.User;
 public interface TeacherService {
     JSONArray select();
     String password();
-    JSONObject update(Teacher teacher);
-    Boolean isFlag(Teacher teacher);
+    JSONObject update(Teacher teacher,JSONArray jsonArray);
 
     /**
      * 把文件传为ex表格

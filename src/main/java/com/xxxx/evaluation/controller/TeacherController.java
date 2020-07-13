@@ -1,5 +1,6 @@
 package com.xxxx.evaluation.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xxxx.evaluation.pojo.BaseResult;
@@ -73,7 +74,7 @@ public class TeacherController {
 //            return BaseResult.error();
 //        }
         //如果密码不相等
-        JSONObject jsonObject = JsonResourceUtils.getJsonObject("static/global.json");
+        JSONObject jsonObject = JsonResourceUtils.getJsonObject("/static/global.json");
         if (!Md5Util.MD5(password).equals(jsonObject.getString("password"))){
             return BaseResult.error();
         }
@@ -81,7 +82,7 @@ public class TeacherController {
         Map<String,List> map = (Map<String, List>) jsonObject.get("classes");
         application.setAttribute("major",map.keySet());
         return BaseResult.success();
-    }
+}
 
     @RequestMapping("/start")
     @ResponseBody
@@ -118,8 +119,12 @@ public class TeacherController {
         application.setAttribute("teacher",null);
         application.setAttribute("start",null);
         application.setAttribute("global",null);
+        JSONArray jsonArray= (JSONArray) application.getAttribute("Students");
+        System.out.println(jsonArray);
+        JSONObject jsonObject = teacherService.update(teacher,jsonArray);
+        application.setAttribute("tree",jsonObject);
         //生成专属json文件
-        if(teacherService.update(teacher)!=null) {
+        if(teacherService.update(teacher,jsonArray)!=null) {
             application.setAttribute("end","end");
             return BaseResult.success();
         }
@@ -150,8 +155,10 @@ public class TeacherController {
 
     @RequestMapping("tree")
     @ResponseBody
-    public JSONObject tree(){
-        return JsonResourceUtils.getJsonObject("static/newWord.json");
+    public JSONObject tree(HttpServletRequest request, HttpServletResponse response){
+        ServletContext application = request.getServletContext();
+        JSONObject jsonObject = (JSONObject) application.getAttribute("tree");
+        return jsonObject;
     }
     @RequestMapping("upexs")
     public String upexs(){

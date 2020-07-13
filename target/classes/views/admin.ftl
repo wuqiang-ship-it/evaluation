@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>教师</title>
-    <link rel="stylesheet" href="${ctx}/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${ctx}/layer/skin/layer.css">
-    <link rel="stylesheet" href="${ctx}/layui/css/layui.css">
+    <link rel="stylesheet" href="${ctx}/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/layer/skin/layer.css" type="text/css">
+    <link rel="stylesheet" href="${ctx}/layui/css/layui.css" type="text/css">
     <script type="text/javascript" src="${ctx}/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${ctx}/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="${ctx}/layer/layer-min.js"></script>
